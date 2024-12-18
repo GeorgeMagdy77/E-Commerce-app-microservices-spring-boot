@@ -1,0 +1,13 @@
+server:
+  port: 8090
+spring:
+  data:
+    mongodb:
+      username: george
+      password: password
+      host: localhost
+      port: 27017
+      database: CustomerDB
+      authentication-database: admin
+#      uri: mongodb://localhost:27017/CustomerDB
+

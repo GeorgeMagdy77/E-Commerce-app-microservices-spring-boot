@@ -1,0 +1,19 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: discovery-server
+  profiles:
+    active: native
+  config:
+    import: configserver:http://localhost:8888
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false  # We don't want this server to connect with itself
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

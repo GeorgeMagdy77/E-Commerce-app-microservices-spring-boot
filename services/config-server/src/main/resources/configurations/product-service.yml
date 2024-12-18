@@ -1,0 +1,21 @@
+server:
+  port: 8050
+  error:
+    include-message: always
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/ProductDB
+    username: george
+    password: password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      format_sql: true
+      show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+#we use validate because we will rely on flyway to create the schema of the database

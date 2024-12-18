@@ -1,0 +1,44 @@
+server:
+  port: 8070
+  error:
+    include-message: always
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/OrderDB
+    username: george
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: orderConfirmation:com.example.orderservice.kafka.OrderConfirmation
+        # the consumer will be aware that OrderConfirmation object can be accepted
+        # the producer need to inform consumer what is the object that will be sent (full path of it's package)
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000   # 5 seconds to establish a connection
+        readTimeout: 10000     # 10 seconds to read the response
+
+
+application:
+  config:
+    customer-url: http://localhost:8222/api/v1/customers
+    payment-url: http://localhost:8222/api/v1/payments
+    product-url: http://localhost:8222/api/v1/products
+
+
+logging:
+  level:
+    com.example.orderservice.external.client.PaymentClient: DEBUG
+    org.springframework.cloud.openfeign: DEBUG

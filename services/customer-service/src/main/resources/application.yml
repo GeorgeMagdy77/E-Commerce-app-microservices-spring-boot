@@ -1,0 +1,13 @@
+server:
+  error:
+    include-message: always
+spring:
+  config:
+    import: optional:configserver:http://localhost:8888  #from here we need to pull the configuration
+  application:
+    name: customer-service
+
+
+
+
+
